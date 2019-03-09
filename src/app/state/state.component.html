@@ -1,0 +1,83 @@
+<div class="container">
+      
+  <div class="row">
+    <div class="col text-center  ">
+      <h4 class="text-white">ADD/EDIT/REMOVE STATE DETAILS</h4> 
+    </div>
+  </div>
+  
+  <br/>
+  <br/> 
+  
+  <div class="row">
+     <div class="col-1"></div>
+    <!-- form -->
+     <div class="col-4">
+        <form #stateForm="ngForm" (ngSubmit)="SaveData(stateForm); stateForm.reset();">
+            <input type="hidden" name="state.stateid" [(ngModel)]="state.stateid">
+            <div class="form-group">
+              <label for="stname"><h5 class="text-white">State Name</h5></label>
+              <input type="text" name="state.statename" #name="ngModel" required
+              [(ngModel)]="state.statename" class="form-control" id="stname">
+            </div>
+
+            <!-- validation -->
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+              State Name is required
+            </div>
+            <button type="submit" class="btn btn-info btn-light btn-wd" [disabled]="!stateForm.form.valid">Save</button>
+        </form>
+     </div>
+
+     <div class="col-2"></div>
+     
+     <!-- table  -->
+     <div class="col-4">
+        <h5 class="text-white">View State List</h5>
+        <table class="table table-bordered">
+            <thead>
+              <tr class="text-white">
+                <th>
+                  ID
+                </th>
+                <th>
+                  State Name
+                </th>
+                <th width="48%">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let state of states;let i=index;">
+                <td>
+                  {{i+1}}
+                </td>
+                <td>
+                  {{state.statename}}
+                </td>
+                <td>
+                  <a (click)="editState(state)">
+                    <i class="btn btn-success ti-pencil-alt"> Edit</i>
+                  </a> &nbsp;
+                  <a (click)="deleteState(state.stateid)">
+                <i class="btn btn-danger ti-eraser"> Delete</i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+     </div>
+  </div>
+  
+  <br/>
+  <br/>
+
+  <div class="row">
+    <div class="col-lg-5"></div>
+    <div class="col-lg-4">
+      <a class="btn btn-light btn-xl js-scroll-trigger" href="#city">ADD CITY</a>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+
+</div>

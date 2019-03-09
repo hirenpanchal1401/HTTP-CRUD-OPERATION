@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 mx-auto text-center">
+      <h2 class="section-heading">Manage User</h2>
+      <hr class="my-4">
+    </div>
+  </div>
+  <div class="row">
+    
+    <div class="col-lg-3 col-md-3"></div>
+    
+    <div class="col-lg-6 col-md-6">
+      <div class="service-box mt-5 mx-auto">  
+        <form [formGroup]="userForm" (ngSubmit)="OnSubmit()">
+
+        <div class="form-group">
+          <label for="uname"><h6>User Name</h6></label>
+          <input type="text" required class="form-control border-input" formControlName="uname" 
+          id="uname">
+          <div [hidden]="userForm.controls.uname.valid || 
+          userForm.controls.uname.pristine" class="alert alert-danger">
+            Name is required
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label for="uemail"><h6>Email ID</h6></label>
+          <input type="text" required class="form-control border-input" formControlName="uemail" 
+          id="uemail">
+          <div [hidden]="userForm.controls.uemail.valid || 
+          userForm.controls.uemail.pristine" class="alert alert-danger">
+            Email ID is required
+          </div>
+        </div>
+      
+      
+        <div class="form-group">
+          <label for="upass"><h6>Password</h6></label>
+          <input type="password" required class="form-control border-input" formControlName="upass"
+           id="upass">
+          <div [hidden]="userForm.controls.upass.valid || 
+          userForm.controls.upass.pristine" class="alert alert-danger">
+            Password is required
+          </div>
+        </div>
+      
+      
+        <div class="form-group">
+          <label for="state"><h6>Select State</h6></label>
+          <select formControlName="usid" #sid class="form-control border-input" 
+          (change)= "LoadCities(sid.value)">
+            <option [ngValue]="null">Select State</option>
+            <option *ngFor="let state of states" 
+            [value]="state.stateid">{{state.statename}}</option>
+          </select>
+         
+        </div>  
+      
+      
+        <div class="form-group">
+          <label for="city"><h6>Select City</h6></label>
+          <select formControlName="ucid" class="form-control border-input">
+            <option [ngValue]="null">Select city</option>
+            <option *ngFor="let city of cities" 
+            [value]="city.cityid">{{city.cityname}}</option> 
+          </select>
+        </div>
+      
+        <button type="submit" [disabled]="!userForm.valid" class="btn btn-success btn-fill btn-wd">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
